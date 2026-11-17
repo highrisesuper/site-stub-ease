@@ -21,7 +21,7 @@ export default function BookingCalendar() {
   const [loadError, setLoadError] = useState('')
   const [selectedDay, setSelectedDay] = useState(null)
   const [selectedSlot, setSelectedSlot] = useState(null)
-  const [form, setForm] = useState({ name: '', email: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '' })
   const [hp, setHp] = useState('')
   const [status, setStatus] = useState('idle') // idle | submitting | done | error
   const [submitMessage, setSubmitMessage] = useState('')
@@ -54,7 +54,7 @@ export default function BookingCalendar() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('submitting')
-    const result = await createBooking({ name: form.name, email: form.email, startTime: selectedSlot, hp })
+    const result = await createBooking({ name: form.name, email: form.email, phone: form.phone, startTime: selectedSlot, hp })
     if (result?.ok) {
       navigate('/call-confirmed')
       return
@@ -134,6 +134,12 @@ export default function BookingCalendar() {
             placeholder="Email Address *"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
+            className="border border-steel-line bg-steel-panel px-4 py-3 text-sm outline-none focus:border-signal"
+          />
+          <input
+            placeholder="Phone Number"
+            value={form.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value })}
             className="border border-steel-line bg-steel-panel px-4 py-3 text-sm outline-none focus:border-signal"
           />
           <button

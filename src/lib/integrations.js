@@ -48,12 +48,12 @@ export async function fetchBookingSlots(startMs, endMs, timezone) {
  * Books one of the slots fetchBookingSlots returned, via /api/booking.
  * Returns { ok:true, appointmentId } | { ok:false, message }.
  */
-export async function createBooking({ name, email, startTime, hp }) {
+export async function createBooking({ name, email, phone, startTime, hp }) {
   try {
     const res = await fetch('/api/booking?action=create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, startTime, hp }),
+      body: JSON.stringify({ name, email, phone, startTime, hp }),
     })
     return await res.json()
   } catch (err) {
