@@ -13,12 +13,12 @@
 //
 // Environment variables (set in Vercel → Project → Settings → Environment Variables):
 //   CRM_BOOKING_URL     — optional override for the CRM's booking resource. Default:
-//                         https://crm-stub-ease.vercel.app/api/site?resource=booking
+//                         https://crm.stubease.com/api/site?resource=booking
 //   CUSTOM_CRM_API_KEY  — shared key sent as `Authorization: Bearer …` to the CRM,
 //                         same variable api/lead.js already uses. Must equal the
 //                         CRM's SITE_API_KEY whenever that is set there.
 
-const DEFAULT_CRM_BOOKING_URL = 'https://crm-stub-ease.vercel.app/api/site?resource=booking'
+const DEFAULT_CRM_BOOKING_URL = 'https://crm.stubease.com/api/site?resource=booking'
 const FORWARD_TIMEOUT_MS = 10000
 const MAX_NAME = 120
 const MAX_EMAIL = 254

@@ -18,7 +18,7 @@ import { allSkus, initialStockMap } from '../src/data/inventory.js'
 import { getKv } from './_lib/kv.js'
 
 const CRM_STOCK_URL =
-  process.env.CRM_STOCK_URL || 'https://crm-stub-ease.vercel.app/api/inventory?action=public-stock'
+  process.env.CRM_STOCK_URL || 'https://crm.stubease.com/api/inventory?action=public-stock'
 const CRM_TIMEOUT_MS = 6000
 
 // The CRM's stock for every SKU this site sells, or null if the CRM can't be reached.

@@ -9,12 +9,12 @@
 //
 // Environment variables (Vercel → Project → Settings → Environment Variables):
 //   CRM_REVIEWS_URL    — optional override of the CRM reviews base URL. Default:
-//                        https://crm-stub-ease.vercel.app/api/site?resource=reviews
+//                        https://crm.stubease.com/api/site?resource=reviews
 //                        (this function appends &action=public / &action=submit).
 //   CUSTOM_CRM_API_KEY — optional shared key sent as `Authorization: Bearer …` on
 //                        submit; must equal the CRM's SITE_API_KEY when that is set.
 
-const DEFAULT_BASE = 'https://crm-stub-ease.vercel.app/api/site?resource=reviews'
+const DEFAULT_BASE = 'https://crm.stubease.com/api/site?resource=reviews'
 const TIMEOUT_MS = 6000
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 

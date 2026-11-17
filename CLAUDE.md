@@ -49,7 +49,7 @@ client (intake, status, changelog, deploy plan) live in the `business-studio` re
 - `src/config/features.js` — `CHECKOUT_ENABLED`, `SHOW_PRICING` (both `true`). Flip to
   hide cart / prices site-wide without touching anything else.
 - `src/lib/` — `analytics.js` (cookie-free page-view beacon → the CRM's
-  `POST https://crm-stub-ease.vercel.app/api/analytics`, one per route change via
+  `POST https://crm.stubease.com/api/analytics`, one per route change via
   `PageviewTracker` in `App.jsx`; only sends from stubease.com / www.stubease.com, never
   from previews or localhost; feeds the CRM's Marketing → Website visitors tool — if the
   CRM moves to a custom domain, update `ENDPOINT`), `integrations.js` (`submitLead` → POST `/api/lead`;
@@ -72,7 +72,7 @@ founder; NEC 300.15(F) / 300.17(F) and "working walking surface" language throug
 
 ## Integrations & environment variables (set in the client's Vercel project — never in code)
 - `/api/lead` (POST) forwards **every** lead to the CRM's intake — `CRM_LEADS_URL`, default
-  `https://crm-stub-ease.vercel.app/api/site?resource=leads&action=intake` — which files it under
+  `https://crm.stubease.com/api/site?resource=leads&action=intake` — which files it under
   the CRM's Leads page and pushes the contact to GoHighLevel (tags `website-lead` +
   `website-estimate`/`website-inquiry`; Jeff's GHL workflow on `website-estimate` notifies him).
   It sends `x-visitor-ip` (first `x-forwarded-for` entry) and, when set,
@@ -97,7 +97,7 @@ founder; NEC 300.15(F) / 300.17(F) and "working walking surface" language throug
   one 6 s deadline), inside this site's 10 s forward timeout.
 - `/api/reviews` — GET proxies the CRM's approved reviews
   (`…/api/site?resource=reviews&action=public`; base overridable with `CRM_REVIEWS_URL`, default
-  `https://crm-stub-ease.vercel.app/api/site?resource=reviews`, the function appends `&action=`),
+  `https://crm.stubease.com/api/site?resource=reviews`, the function appends `&action=`),
   6 s timeout, returns `{ ok, reviews: [{id,name,title,company,location,rating,body,approvedAt}] }`
   (`ok:false, reviews:[]` if the CRM can't be reached), `Cache-Control: public, max-age=60,
   s-maxage=60`. POST validates (rating int 1–5, name 2–80, body 20–2000, title/company/location
@@ -109,7 +109,7 @@ founder; NEC 300.15(F) / 300.17(F) and "working walking surface" language throug
 - **Booking:** `/contact?tab=meeting` shows a custom-built, on-brand calendar
   (`src/components/BookingCalendar.jsx`) — no GHL iframe. It calls `/api/booking`
   (`action=slots`/`action=create`), which proxies to the CRM's `resource=booking` route
-  (`CRM_BOOKING_URL`, default `https://crm-stub-ease.vercel.app/api/site?resource=booking`,
+  (`CRM_BOOKING_URL`, default `https://crm.stubease.com/api/site?resource=booking`,
   same `CUSTOM_CRM_API_KEY` Bearer auth as `/api/lead`), which calls GoHighLevel's real
   Calendar API (`crm-stub-ease/api/_lib/ghl-calendar.ts`). GHL stays the single source of
   truth for times, bookings, and automations — this site and the CRM never store a booking
@@ -145,7 +145,7 @@ founder; NEC 300.15(F) / 300.17(F) and "working walking surface" language throug
 - `/api/inventory` (GET) returns **the CRM's stock** — the stock of record since
   2026-10-05: the CRM (crm-stub-ease) records every Stripe sale (website checkout) and
   takes its stock down, so the site and the CRM count the same boxes. It reads
-  `https://crm-stub-ease.vercel.app/api/inventory?action=public-stock` (override with
+  `https://crm.stubease.com/api/inventory?action=public-stock` (override with
   `CRM_STOCK_URL`; website SKU names, kits in boxes, parts in pieces, no prices) — and
   that call also makes the CRM pull any new Stripe sale in, so a sale lands in the CRM
   as soon as the site is visited (the buyer's return after paying included). Falls back

@@ -6,7 +6,7 @@
 //
 // Environment variables (set in Vercel → Project → Settings → Environment Variables):
 //   CRM_LEADS_URL            — optional override for the CRM's lead intake. Default:
-//                              https://crm-stub-ease.vercel.app/api/site?resource=leads&action=intake
+//                              https://crm.stubease.com/api/site?resource=leads&action=intake
 //                              Every lead goes here; the CRM files it under Leads and pushes
 //                              the contact to GoHighLevel with website-lead tags.
 //   CUSTOM_CRM_API_KEY       — optional shared key sent as `Authorization: Bearer …` to the
@@ -27,7 +27,7 @@
 // Once a lead is valid the visitor always gets 200; a failed, timed-out or non-2xx
 // forward is logged (Vercel function logs) rather than shown to the visitor.
 
-const DEFAULT_CRM_LEADS_URL = 'https://crm-stub-ease.vercel.app/api/site?resource=leads&action=intake'
+const DEFAULT_CRM_LEADS_URL = 'https://crm.stubease.com/api/site?resource=leads&action=intake'
 const FORWARD_TIMEOUT_MS = 10000
 const MAX_EMAIL = 254
 const MAX_SHORT = 200 // names, company, phone, reason, source, trade size …

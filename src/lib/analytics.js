@@ -11,7 +11,7 @@
 // automated browsers (navigator.webdriver) never send anything.
 // -----------------------------------------------------------------------
 
-export const ENDPOINT = 'https://crm-stub-ease.vercel.app/api/analytics'
+export const ENDPOINT = 'https://crm.stubease.com/api/analytics'
 export const TRACKED_HOSTS = ['stubease.com', 'www.stubease.com']
 
 /**
